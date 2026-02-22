@@ -116,9 +116,7 @@ class Record:
 
 
 class AddressBook(UserDict):
-    """
-    Container for contact records.
-    """
+    """Container for contact records."""
 
     def add_record(self, record: Record) -> None:
         self.data[record.name.value] = record
