@@ -10,10 +10,7 @@ def input_error(func: Callable) -> Callable:
         try:
             return func(*args, **kwargs)
         except ValueError as e:
-            # Catches data validation errors
-            # (incorrect phone number, date)
-            # And errors due to missing arguments,
-            # which we will discard manually
+            # Handle validation and argument errors
             return str(e)
         except KeyError as e:
             # Catches "Contact not found" errors
