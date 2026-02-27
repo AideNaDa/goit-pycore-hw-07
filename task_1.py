@@ -300,13 +300,17 @@ def format_birthdays(upcoming: list[dict[str, str]]) -> str:
     if not upcoming:
         return "No upcoming birthdays in the next 7 days."
 
-    header = f"{'Name':<COLUNM_LENGTH} | {'Congratulation Date':<COLUNM_LENGTH}"
+    header = (
+        f"{'Name':<{COLUMN_LENGTH}} | {'Congratulation Date':<{COLUMN_LENGTH}}"
+    )
     separator = "-" * TABLE_LENGTH
 
     lines = [separator, header, separator]
 
     for item in upcoming:
-        lines.append(f"{item['name']:<COLUNM_LENGTH} | {item['date']:<COLUNM_LENGTH}")
+        lines.append(
+            f"{item['name']:<{COLUMN_LENGTH}} | {item['date']:<{COLUMN_LENGTH}}"
+        )
         lines.append(separator)
 
     return "\n".join(lines)
@@ -321,19 +325,23 @@ def show_all(book: AddressBook) -> str:
     if not book.data:
         return "Address book is empty."
 
-    header = f"{'Name':<COLUNM_LENGTH} | {'Phone':<COLUNM_LENGTH}"
-    separator = "-" * TANLE_LENGTH
+    header = f"{'Name':<{COLUMN_LENGTH}} | {'Phone':<{COLUMN_LENGTH}}"
+    separator = "-" * TABLE_LENGTH
 
     lines = [separator, header, separator]
 
     for record in book.data.values():
         phones = record.phones
         first_phone = phones[0].value if phones else "No phones"
-        lines.append(f"{record.name.value:<COLUNM_LENGTH} | {first_phone:<COLUNM_LENGTH}")
+        lines.append(
+            f"{record.name.value:<{COLUMN_LENGTH}} | {first_phone:<{COLUMN_LENGTH}}"
+        )
 
         if len(phones) > 1:
             for phone in phones[1:]:
-                lines.append(f'{"":<COLUNM_LENGTH} | {phone.value:<COLUNM_LENGTH}')
+                lines.append(
+                    f'{"":<{COLUMN_LENGTH}} | {phone.value:<{COLUMN_LENGTH}}'
+                )
         lines.append(separator)
 
     return "\n".join(lines)
