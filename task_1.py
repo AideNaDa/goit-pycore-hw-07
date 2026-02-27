@@ -7,6 +7,8 @@ from typing import Callable, Any
 PHONE_LENGTH = 10
 DATE_FORMAT = "%d-%m-%Y"
 WEEKEND_DAYS = (5, 6)
+TABLE_LENGTH = 45
+COLUMN_LENGTH = 21
 
 
 def input_error(func: Callable) -> Callable:
@@ -298,13 +300,13 @@ def format_birthdays(upcoming: list[dict[str, str]]) -> str:
     if not upcoming:
         return "No upcoming birthdays in the next 7 days."
 
-    header = f"{'Name':<21} | {'Congratulation Date':<21}"
-    separator = "-" * 45
+    header = f"{'Name':<COLUNM_LENGTH} | {'Congratulation Date':<COLUNM_LENGTH}"
+    separator = "-" * TABLE_LENGTH
 
     lines = [separator, header, separator]
 
     for item in upcoming:
-        lines.append(f"{item['name']:<21} | {item['date']:<21}")
+        lines.append(f"{item['name']:<COLUNM_LENGTH} | {item['date']:<COLUNM_LENGTH}")
         lines.append(separator)
 
     return "\n".join(lines)
@@ -319,19 +321,19 @@ def show_all(book: AddressBook) -> str:
     if not book.data:
         return "Address book is empty."
 
-    header = f"{'Name':<21} | {'Phone':<21}"
-    separator = "-" * 45
+    header = f"{'Name':<COLUNM_LENGTH} | {'Phone':<COLUNM_LENGTH}"
+    separator = "-" * TANLE_LENGTH
 
     lines = [separator, header, separator]
 
     for record in book.data.values():
         phones = record.phones
         first_phone = phones[0].value if phones else "No phones"
-        lines.append(f"{record.name.value:<21} | {first_phone:<21}")
+        lines.append(f"{record.name.value:<COLUNM_LENGTH} | {first_phone:<COLUNM_LENGTH}")
 
         if len(phones) > 1:
             for phone in phones[1:]:
-                lines.append(f'{"":<21} | {phone.value:<21}')
+                lines.append(f'{"":<COLUNM_LENGTH} | {phone.value:<COLUNM_LENGTH}')
         lines.append(separator)
 
     return "\n".join(lines)
